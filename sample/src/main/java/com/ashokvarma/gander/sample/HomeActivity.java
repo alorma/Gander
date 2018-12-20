@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
 
 import com.ashokvarma.gander.Gander;
 import com.ashokvarma.gander.GanderInterceptor;
@@ -22,6 +23,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private Switch stickyNotification;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         Gander.addAppShortcut(this);
+
+        stickyNotification = findViewById(R.id.sticky_notification);
+
     }
 
     @Override
@@ -70,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
                                 .maxContentLength(250000L)
                                 .retainDataFor(GanderInterceptor.Period.FOREVER)
                                 .redactHeader("Authorization")
-                                .setSticky(true)
+                                .setSticky(stickyNotification.isChecked())
                 )
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
