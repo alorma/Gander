@@ -70,6 +70,7 @@ public class HomeActivity extends AppCompatActivity {
                                 .maxContentLength(250000L)
                                 .retainDataFor(GanderInterceptor.Period.FOREVER)
                                 .redactHeader("Authorization")
+                                .setSticky(true)
                 )
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build();
